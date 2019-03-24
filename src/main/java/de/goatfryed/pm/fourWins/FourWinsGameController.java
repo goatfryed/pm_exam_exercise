@@ -2,12 +2,20 @@ package de.goatfryed.pm.fourWins;
 
 import de.goatfryed.pm.fourWins.model.Column;
 import de.goatfryed.pm.fourWins.model.Token;
+import de.goatfryed.pm.fourWins.model.tables.ColumnTable;
+import de.goatfryed.pm.fourWins.model.tables.TokenTable;
 
 public class FourWinsGameController {
 
     public boolean insert(Token token, Column column)
     {
-        int height = column.getTokens().stream().mapToInt(Token::getHeight).max().orElse(-1) + 1;
+        int height = new ColumnTable(column)
+                .expandTokens()
+                .expandHeight()
+                .max() + 1;
+        if (height < 0) {
+            height = 0;
+        }
 
         if (height > column.getMaxHeight()) {
             return false;
@@ -35,10 +43,13 @@ public class FourWinsGameController {
     }
 
     private boolean checkColumn(Token trigger) {
-        return trigger.getColumn().getTokens().stream()
+        return new TokenTable(trigger)
+                .expandColumn()
+                .expandTokens()
                 .filter(t -> t.getPlayer() == trigger.getPlayer())
                 .filter(t -> t.getHeight() > trigger.getHeight() - 4)
-                .count() > 4;
+                .toSet()
+                .size() > 4;
     }
 
     private boolean hasSeries(Token trigger, int increment)
@@ -57,9 +68,12 @@ public class FourWinsGameController {
             if (other == null || height < 0) {
                 break;
             }
-            boolean match = other.getTokens().stream()
+            boolean match = new ColumnTable(other)
+                    .expandTokens()
                     .filter(t -> t.getPlayer() == trigger.getPlayer())
-                    .anyMatch(t -> t.getHeight() == expectedHeight);
+                    .filter(t -> t.getHeight() == expectedHeight)
+                    .toSet()
+                    .size() > 0;
 
             if (match) {
                 i++;
