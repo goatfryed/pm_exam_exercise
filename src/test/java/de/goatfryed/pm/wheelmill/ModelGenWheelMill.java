@@ -13,7 +13,7 @@ public class ModelGenWheelMill {
     @Test
     public void generateModel()
     {
-        ClassModelBuilder mb = new ClassModelBuilder("pm.examples.wheelmill");
+        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.wheelmill.model");
         ClassBuilder game = mb.buildClass("Game");
         ClassBuilder player = mb.buildClass("Player");
         player.buildAttribute("name", mb.STRING)
@@ -39,8 +39,6 @@ public class ModelGenWheelMill {
 
         Fulib.generator().generate(mb.getClassModel());
         Fulib.tablesGenerator().generate(mb.getClassModel());
-
-        FulibTools.classDiagrams().dumpPng(mb.getClassModel());
     }
 
     public boolean move(Stone stone, Place target)

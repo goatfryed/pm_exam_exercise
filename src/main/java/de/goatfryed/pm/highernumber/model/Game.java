@@ -1,10 +1,10 @@
-package de.goatfryed.pm.battleships.model;
+package de.goatfryed.pm.highernumber.model;
 
 import java.beans.PropertyChangeSupport;
 
 import java.beans.PropertyChangeListener;
 
-public class Game  
+public class Game 
 {
 
    public static final java.util.ArrayList<Player> EMPTY_players = new java.util.ArrayList<Player>()
@@ -85,37 +85,6 @@ public class Game
    }
 
 
-   public static final String PROPERTY_currentPlayer = "currentPlayer";
-
-   private Player currentPlayer = null;
-
-   public Player getCurrentPlayer()
-   {
-      return this.currentPlayer;
-   }
-
-   public Game setCurrentPlayer(Player value)
-   {
-      if (this.currentPlayer != value)
-      {
-         Player oldValue = this.currentPlayer;
-         if (this.currentPlayer != null)
-         {
-            this.currentPlayer = null;
-            oldValue.setActive(null);
-         }
-         this.currentPlayer = value;
-         if (value != null)
-         {
-            value.setActive(this);
-         }
-         firePropertyChange("currentPlayer", oldValue, value);
-      }
-      return this;
-   }
-
-
-
    public static final String PROPERTY_winner = "winner";
 
    private Player winner = null;
@@ -141,6 +110,37 @@ public class Game
             value.setGameWon(this);
          }
          firePropertyChange("winner", oldValue, value);
+      }
+      return this;
+   }
+
+
+
+   public static final String PROPERTY_currentPlayer = "currentPlayer";
+
+   private Player currentPlayer = null;
+
+   public Player getCurrentPlayer()
+   {
+      return this.currentPlayer;
+   }
+
+   public Game setCurrentPlayer(Player value)
+   {
+      if (this.currentPlayer != value)
+      {
+         Player oldValue = this.currentPlayer;
+         if (this.currentPlayer != null)
+         {
+            this.currentPlayer = null;
+            oldValue.setActiveIn(null);
+         }
+         this.currentPlayer = value;
+         if (value != null)
+         {
+            value.setActiveIn(this);
+         }
+         firePropertyChange("currentPlayer", oldValue, value);
       }
       return this;
    }
@@ -201,19 +201,13 @@ public class Game
 
    public void removeYou()
    {
-      this.setCurrentPlayer(null);
       this.setWinner(null);
+      this.setCurrentPlayer(null);
 
       this.withoutPlayers(this.getPlayers().clone());
 
 
    }
-
-
-
-
-
-
 
 
 }

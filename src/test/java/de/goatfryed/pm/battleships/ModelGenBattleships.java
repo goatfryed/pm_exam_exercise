@@ -9,7 +9,7 @@ public class ModelGenBattleships {
 
     @Test
     public void createModel() {
-        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.uniks.pm.battleships.model");
+        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.battleships.model");
         ClassBuilder game = mb.buildClass("Game")
                 ;
         ClassBuilder player = mb.buildClass("Player")

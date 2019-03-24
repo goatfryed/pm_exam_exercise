@@ -3,8 +3,8 @@
   defaultPropertyStyle: 	POJO
   defaultRoleType: 	"java.util.ArrayList<%s>"
   mainJavaDir: 	"src/main/java"
-  packageName: 	de.goatfryed.pm.uniks.pm.battleships.model
-  packageSrcFolder: 	"src/main/java/de/uniks/pm/battleships/model"
+  packageName: 	de.goatfryed.pm.battleships.model
+  packageSrcFolder: 	"src/main/java/de/goatfryed/pm/battleships/model"
 
 - game2: 	Clazz
   model: 	c1

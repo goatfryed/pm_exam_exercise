@@ -1,5 +1,9 @@
 package de.goatfryed.pm.highernumber;
 
+import de.goatfryed.pm.highernumber.model.Comment;
+import de.goatfryed.pm.highernumber.model.Game;
+import de.goatfryed.pm.highernumber.model.Player;
+import de.goatfryed.pm.highernumber.model.Number;
 import org.junit.Test;
 
 public class HigherNumberTest {

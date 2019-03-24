@@ -1,5 +1,8 @@
 package de.goatfryed.pm.fourWins;
 
+import de.goatfryed.pm.fourWins.model.Column;
+import de.goatfryed.pm.fourWins.model.Token;
+
 public class FourWinsGameController {
 
     public boolean insert(Token token, Column column)

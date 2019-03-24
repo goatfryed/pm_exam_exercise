@@ -10,7 +10,7 @@ public class ModelGenFoxAndGeese {
     @Test
     public void generateModel()
     {
-        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.foxAndGeese");
+        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.foxAndGeese.model");
         ClassBuilder game = mb.buildClass("Game");
         ClassBuilder player = mb.buildClass("Player");
         player.buildAttribute("name", mb.STRING);

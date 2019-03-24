@@ -1,88 +1,72 @@
-package de.goatfryed.pm.battleships.model;
+package de.goatfryed.pm.foxAndGeese.model;
 
 import java.beans.PropertyChangeSupport;
 
 import java.beans.PropertyChangeListener;
 
-public class Game  
+public class Game 
 {
 
-   public static final java.util.ArrayList<Player> EMPTY_players = new java.util.ArrayList<Player>()
-   { @Override public boolean add(Player value){ throw new UnsupportedOperationException("No direct add! Use xy.withPlayers(obj)"); }};
+   public static final String PROPERTY_fox = "fox";
 
+   private Player fox = null;
 
-   public static final String PROPERTY_players = "players";
-
-   private java.util.ArrayList<Player> players = null;
-
-   public java.util.ArrayList<Player> getPlayers()
+   public Player getFox()
    {
-      if (this.players == null)
-      {
-         return EMPTY_players;
-      }
-
-      return this.players;
+      return this.fox;
    }
 
-   public Game withPlayers(Object... value)
+   public Game setFox(Player value)
    {
-      if(value==null) return this;
-      for (Object item : value)
+      if (this.fox != value)
       {
-         if (item == null) continue;
-         if (item instanceof java.util.Collection)
+         Player oldValue = this.fox;
+         if (this.fox != null)
          {
-            for (Object i : (java.util.Collection) item)
-            {
-               this.withPlayers(i);
-            }
+            this.fox = null;
+            oldValue.setFoxOf(null);
          }
-         else if (item instanceof Player)
+         this.fox = value;
+         if (value != null)
          {
-            if (this.players == null)
-            {
-               this.players = new java.util.ArrayList<Player>();
-            }
-            if ( ! this.players.contains(item))
-            {
-               this.players.add((Player)item);
-               ((Player)item).setGame(this);
-               firePropertyChange("players", null, item);
-            }
+            value.setFoxOf(this);
          }
-         else throw new IllegalArgumentException();
+         firePropertyChange("fox", oldValue, value);
       }
       return this;
    }
 
 
 
-   public Game withoutPlayers(Object... value)
+   public static final String PROPERTY_geese = "geese";
+
+   private Player geese = null;
+
+   public Player getGeese()
    {
-      if (this.players == null || value==null) return this;
-      for (Object item : value)
+      return this.geese;
+   }
+
+   public Game setGeese(Player value)
+   {
+      if (this.geese != value)
       {
-         if (item == null) continue;
-         if (item instanceof java.util.Collection)
+         Player oldValue = this.geese;
+         if (this.geese != null)
          {
-            for (Object i : (java.util.Collection) item)
-            {
-               this.withoutPlayers(i);
-            }
+            this.geese = null;
+            oldValue.setGeeseOf(null);
          }
-         else if (item instanceof Player)
+         this.geese = value;
+         if (value != null)
          {
-            if (this.players.contains(item))
-            {
-               this.players.remove((Player)item);
-               ((Player)item).setGame(null);
-               firePropertyChange("players", item, null);
-            }
+            value.setGeeseOf(this);
          }
+         firePropertyChange("geese", oldValue, value);
       }
       return this;
    }
+
 
 
    public static final String PROPERTY_currentPlayer = "currentPlayer";
@@ -102,12 +86,12 @@ public class Game
          if (this.currentPlayer != null)
          {
             this.currentPlayer = null;
-            oldValue.setActive(null);
+            oldValue.setCurrentPlayerOf(null);
          }
          this.currentPlayer = value;
          if (value != null)
          {
-            value.setActive(this);
+            value.setCurrentPlayerOf(this);
          }
          firePropertyChange("currentPlayer", oldValue, value);
       }
@@ -133,12 +117,12 @@ public class Game
          if (this.winner != null)
          {
             this.winner = null;
-            oldValue.setGameWon(null);
+            oldValue.setWinnerOf(null);
          }
          this.winner = value;
          if (value != null)
          {
-            value.setGameWon(this);
+            value.setWinnerOf(this);
          }
          firePropertyChange("winner", oldValue, value);
       }
@@ -201,19 +185,12 @@ public class Game
 
    public void removeYou()
    {
+      this.setFox(null);
+      this.setGeese(null);
       this.setCurrentPlayer(null);
       this.setWinner(null);
 
-      this.withoutPlayers(this.getPlayers().clone());
-
-
    }
-
-
-
-
-
-
 
 
 }

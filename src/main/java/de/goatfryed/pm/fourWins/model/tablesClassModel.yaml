@@ -1,77 +1,79 @@
 - c1: 	ClassModel
-  classes: 	game2 	player3 	boat4 	section5 	shot6 	
+  classes: 	game2 	player3 	column4 	token5 	
   defaultPropertyStyle: 	POJO
   defaultRoleType: 	"java.util.ArrayList<%s>"
   mainJavaDir: 	"src/main/java"
-  packageName: 	de.goatfryed.pm.battleships.model
-  packageSrcFolder: 	"src/main/java/de/goatfryed/pm/battleships/model"
+  packageName: 	de.goatfryed.pm.fourWins.model
+  packageSrcFolder: 	"src/main/java/de/goatfryed/pm/fourWins/model"
 
 - game2: 	Clazz
   model: 	c1
   modified: 	false
   name: 	Game
   propertyStyle: 	POJO
-  roles: 	players7 	currentPlayer8 	winner9 	
+  roles: 	players6 	currentPlayer7 	winner8 	columns9 	
 
 - player3: 	Clazz
-  attributes: 	name10 	
+  attributes: 	name10 	color11 	
   model: 	c1
   modified: 	false
   name: 	Player
   propertyStyle: 	POJO
-  roles: 	game11 	active12 	gameWon13 	boats14 	shots15 	sections16 	
+  roles: 	game12 	active13 	gameWon14 	tokens15 	
 
-- boat4: 	Clazz
-  attributes: 	type17 	
+- column4: 	Clazz
+  attributes: 	id16 	maxHeight17 	
   model: 	c1
   modified: 	false
-  name: 	Boat
+  name: 	Column
   propertyStyle: 	POJO
-  roles: 	player18 	sections19 	
+  roles: 	game18 	tokens19 	left20 	right21 	
 
-- section5: 	Clazz
-  attributes: 	column20 	row21 	
+- token5: 	Clazz
+  attributes: 	height22 	
   model: 	c1
   modified: 	false
-  name: 	Section
+  name: 	Token
   propertyStyle: 	POJO
-  roles: 	boat22 	player23 	shotBy24 	
+  roles: 	player23 	column24 	
 
-- shot6: 	Clazz
-  attributes: 	column25 	row26 	
-  model: 	c1
-  modified: 	false
-  name: 	Shot
-  propertyStyle: 	POJO
-  roles: 	player27 	hit28 	
-
-- players7: 	AssocRole
+- players6: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	game2
   modified: 	false
   name: 	players
-  other: 	game11
+  other: 	game12
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- currentPlayer8: 	AssocRole
+- currentPlayer7: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	game2
   modified: 	false
   name: 	currentPlayer
-  other: 	active12
+  other: 	active13
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- winner9: 	AssocRole
+- winner8: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	game2
   modified: 	false
   name: 	winner
-  other: 	gameWon13
+  other: 	gameWon14
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- columns9: 	AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	game2
+  modified: 	false
+  name: 	columns
+  other: 	game18
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
@@ -82,168 +84,131 @@
   propertyStyle: 	POJO
   type: 	String
 
-- game11: 	AssocRole
+- color11: 	Attribute
+  clazz: 	player3
+  modified: 	false
+  name: 	color
+  propertyStyle: 	POJO
+  type: 	String
+
+- game12: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	player3
   modified: 	false
   name: 	game
-  other: 	players7
+  other: 	players6
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- active12: 	AssocRole
+- active13: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	player3
   modified: 	false
   name: 	active
-  other: 	currentPlayer8
+  other: 	currentPlayer7
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- gameWon13: 	AssocRole
+- gameWon14: 	AssocRole
   aggregation: 	false
   cardinality: 	1
   clazz: 	player3
   modified: 	false
   name: 	gameWon
-  other: 	winner9
+  other: 	winner8
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- boats14: 	AssocRole
+- tokens15: 	AssocRole
   aggregation: 	false
   cardinality: 	42
   clazz: 	player3
   modified: 	false
-  name: 	boats
-  other: 	player18
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- shots15: 	AssocRole
-  aggregation: 	false
-  cardinality: 	42
-  clazz: 	player3
-  modified: 	false
-  name: 	shots
-  other: 	player27
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- sections16: 	AssocRole
-  aggregation: 	false
-  cardinality: 	42
-  clazz: 	player3
-  modified: 	false
-  name: 	sections
+  name: 	tokens
   other: 	player23
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- type17: 	Attribute
-  clazz: 	boat4
+- id16: 	Attribute
+  clazz: 	column4
   modified: 	false
-  name: 	type
-  propertyStyle: 	POJO
-  type: 	String
-
-- player18: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
-  clazz: 	boat4
-  modified: 	false
-  name: 	player
-  other: 	boats14
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- sections19: 	AssocRole
-  aggregation: 	false
-  cardinality: 	42
-  clazz: 	boat4
-  modified: 	false
-  name: 	sections
-  other: 	boat22
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- column20: 	Attribute
-  clazz: 	section5
-  modified: 	false
-  name: 	column
+  name: 	id
   propertyStyle: 	POJO
   type: 	int
 
-- row21: 	Attribute
-  clazz: 	section5
+- maxHeight17: 	Attribute
+  clazz: 	column4
   modified: 	false
-  name: 	row
+  name: 	maxHeight
   propertyStyle: 	POJO
-  type: 	String
+  type: 	int
 
-- boat22: 	AssocRole
+- game18: 	AssocRole
   aggregation: 	false
   cardinality: 	1
-  clazz: 	section5
+  clazz: 	column4
   modified: 	false
-  name: 	boat
-  other: 	sections19
+  name: 	game
+  other: 	columns9
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
+
+- tokens19: 	AssocRole
+  aggregation: 	false
+  cardinality: 	42
+  clazz: 	column4
+  modified: 	false
+  name: 	tokens
+  other: 	column24
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- left20: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	column4
+  modified: 	false
+  name: 	left
+  other: 	right21
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- right21: 	AssocRole
+  aggregation: 	false
+  cardinality: 	1
+  clazz: 	column4
+  modified: 	false
+  name: 	right
+  other: 	left20
+  propertyStyle: 	POJO
+  roleType: 	"java.util.ArrayList<%s>"
+
+- height22: 	Attribute
+  clazz: 	token5
+  modified: 	false
+  name: 	height
+  propertyStyle: 	POJO
+  type: 	int
 
 - player23: 	AssocRole
   aggregation: 	false
   cardinality: 	1
-  clazz: 	section5
+  clazz: 	token5
   modified: 	false
   name: 	player
-  other: 	sections16
+  other: 	tokens15
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 
-- shotBy24: 	AssocRole
+- column24: 	AssocRole
   aggregation: 	false
   cardinality: 	1
-  clazz: 	section5
-  modified: 	false
-  name: 	shotBy
-  other: 	hit28
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- column25: 	Attribute
-  clazz: 	shot6
+  clazz: 	token5
   modified: 	false
   name: 	column
-  propertyStyle: 	POJO
-  type: 	int
-
-- row26: 	Attribute
-  clazz: 	shot6
-  modified: 	false
-  name: 	row
-  propertyStyle: 	POJO
-  type: 	String
-
-- player27: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
-  clazz: 	shot6
-  modified: 	false
-  name: 	player
-  other: 	shots15
-  propertyStyle: 	POJO
-  roleType: 	"java.util.ArrayList<%s>"
-
-- hit28: 	AssocRole
-  aggregation: 	false
-  cardinality: 	1
-  clazz: 	shot6
-  modified: 	false
-  name: 	hit
-  other: 	shotBy24
+  other: 	tokens19
   propertyStyle: 	POJO
   roleType: 	"java.util.ArrayList<%s>"
 

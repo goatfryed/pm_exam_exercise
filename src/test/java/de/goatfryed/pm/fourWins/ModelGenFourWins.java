@@ -9,7 +9,7 @@ public class ModelGenFourWins {
     @Test
     public void generateModel()
     {
-        ClassModelBuilder mb = new ClassModelBuilder("pm.examples.fourWins");
+        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.fourWins.model");
         ClassBuilder game = mb.buildClass("Game");
 
         ClassBuilder player = mb.buildClass("Player");
@@ -34,5 +34,6 @@ public class ModelGenFourWins {
         column.buildAssociation(column, "left", mb.ONE, "right", mb.ONE);
 
         Fulib.generator().generate(mb.getClassModel());
+        Fulib.tablesGenerator().generate(mb.getClassModel());
     }
 }

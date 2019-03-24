@@ -1,10 +1,10 @@
-package de.goatfryed.pm.battleships.model;
+package de.goatfryed.pm.wheelmill.model;
 
 import java.beans.PropertyChangeSupport;
 
 import java.beans.PropertyChangeListener;
 
-public class Game  
+public class Game 
 {
 
    public static final java.util.ArrayList<Player> EMPTY_players = new java.util.ArrayList<Player>()
@@ -147,6 +147,115 @@ public class Game
 
 
 
+   public static final java.util.ArrayList<Diagonal> EMPTY_diagonals = new java.util.ArrayList<Diagonal>()
+   { @Override public boolean add(Diagonal value){ throw new UnsupportedOperationException("No direct add! Use xy.withDiagonals(obj)"); }};
+
+
+   public static final String PROPERTY_diagonals = "diagonals";
+
+   private java.util.ArrayList<Diagonal> diagonals = null;
+
+   public java.util.ArrayList<Diagonal> getDiagonals()
+   {
+      if (this.diagonals == null)
+      {
+         return EMPTY_diagonals;
+      }
+
+      return this.diagonals;
+   }
+
+   public Game withDiagonals(Object... value)
+   {
+      if(value==null) return this;
+      for (Object item : value)
+      {
+         if (item == null) continue;
+         if (item instanceof java.util.Collection)
+         {
+            for (Object i : (java.util.Collection) item)
+            {
+               this.withDiagonals(i);
+            }
+         }
+         else if (item instanceof Diagonal)
+         {
+            if (this.diagonals == null)
+            {
+               this.diagonals = new java.util.ArrayList<Diagonal>();
+            }
+            if ( ! this.diagonals.contains(item))
+            {
+               this.diagonals.add((Diagonal)item);
+               ((Diagonal)item).setGame(this);
+               firePropertyChange("diagonals", null, item);
+            }
+         }
+         else throw new IllegalArgumentException();
+      }
+      return this;
+   }
+
+
+
+   public Game withoutDiagonals(Object... value)
+   {
+      if (this.diagonals == null || value==null) return this;
+      for (Object item : value)
+      {
+         if (item == null) continue;
+         if (item instanceof java.util.Collection)
+         {
+            for (Object i : (java.util.Collection) item)
+            {
+               this.withoutDiagonals(i);
+            }
+         }
+         else if (item instanceof Diagonal)
+         {
+            if (this.diagonals.contains(item))
+            {
+               this.diagonals.remove((Diagonal)item);
+               ((Diagonal)item).setGame(null);
+               firePropertyChange("diagonals", item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+
+   public static final String PROPERTY_center = "center";
+
+   private Place center = null;
+
+   public Place getCenter()
+   {
+      return this.center;
+   }
+
+   public Game setCenter(Place value)
+   {
+      if (this.center != value)
+      {
+         Place oldValue = this.center;
+         if (this.center != null)
+         {
+            this.center = null;
+            oldValue.setCenterOf(null);
+         }
+         this.center = value;
+         if (value != null)
+         {
+            value.setCenterOf(this);
+         }
+         firePropertyChange("center", oldValue, value);
+      }
+      return this;
+   }
+
+
+
    protected PropertyChangeSupport listeners = null;
 
    public boolean firePropertyChange(String propertyName, Object oldValue, Object newValue)
@@ -203,17 +312,15 @@ public class Game
    {
       this.setCurrentPlayer(null);
       this.setWinner(null);
+      this.setCenter(null);
 
       this.withoutPlayers(this.getPlayers().clone());
 
 
+      this.withoutDiagonals(this.getDiagonals().clone());
+
+
    }
-
-
-
-
-
-
 
 
 }

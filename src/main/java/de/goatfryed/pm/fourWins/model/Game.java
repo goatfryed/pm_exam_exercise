@@ -1,10 +1,10 @@
-package de.goatfryed.pm.battleships.model;
+package de.goatfryed.pm.fourWins.model;
 
 import java.beans.PropertyChangeSupport;
 
 import java.beans.PropertyChangeListener;
 
-public class Game  
+public class Game 
 {
 
    public static final java.util.ArrayList<Player> EMPTY_players = new java.util.ArrayList<Player>()
@@ -147,6 +147,84 @@ public class Game
 
 
 
+   public static final java.util.ArrayList<Column> EMPTY_columns = new java.util.ArrayList<Column>()
+   { @Override public boolean add(Column value){ throw new UnsupportedOperationException("No direct add! Use xy.withColumns(obj)"); }};
+
+
+   public static final String PROPERTY_columns = "columns";
+
+   private java.util.ArrayList<Column> columns = null;
+
+   public java.util.ArrayList<Column> getColumns()
+   {
+      if (this.columns == null)
+      {
+         return EMPTY_columns;
+      }
+
+      return this.columns;
+   }
+
+   public Game withColumns(Object... value)
+   {
+      if(value==null) return this;
+      for (Object item : value)
+      {
+         if (item == null) continue;
+         if (item instanceof java.util.Collection)
+         {
+            for (Object i : (java.util.Collection) item)
+            {
+               this.withColumns(i);
+            }
+         }
+         else if (item instanceof Column)
+         {
+            if (this.columns == null)
+            {
+               this.columns = new java.util.ArrayList<Column>();
+            }
+            if ( ! this.columns.contains(item))
+            {
+               this.columns.add((Column)item);
+               ((Column)item).setGame(this);
+               firePropertyChange("columns", null, item);
+            }
+         }
+         else throw new IllegalArgumentException();
+      }
+      return this;
+   }
+
+
+
+   public Game withoutColumns(Object... value)
+   {
+      if (this.columns == null || value==null) return this;
+      for (Object item : value)
+      {
+         if (item == null) continue;
+         if (item instanceof java.util.Collection)
+         {
+            for (Object i : (java.util.Collection) item)
+            {
+               this.withoutColumns(i);
+            }
+         }
+         else if (item instanceof Column)
+         {
+            if (this.columns.contains(item))
+            {
+               this.columns.remove((Column)item);
+               ((Column)item).setGame(null);
+               firePropertyChange("columns", item, null);
+            }
+         }
+      }
+      return this;
+   }
+
+
    protected PropertyChangeSupport listeners = null;
 
    public boolean firePropertyChange(String propertyName, Object oldValue, Object newValue)
@@ -207,13 +285,10 @@ public class Game
       this.withoutPlayers(this.getPlayers().clone());
 
 
+      this.withoutColumns(this.getColumns().clone());
+
+
    }
-
-
-
-
-
-
 
 
 }

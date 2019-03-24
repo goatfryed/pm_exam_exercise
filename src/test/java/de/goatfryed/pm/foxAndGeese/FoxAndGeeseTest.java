@@ -1,5 +1,9 @@
 package de.goatfryed.pm.foxAndGeese;
 
+import de.goatfryed.pm.foxAndGeese.model.Field;
+import de.goatfryed.pm.foxAndGeese.model.Game;
+import de.goatfryed.pm.foxAndGeese.model.Meeple;
+import de.goatfryed.pm.foxAndGeese.model.Player;
 import org.junit.Assert;
 import org.junit.Test;
 

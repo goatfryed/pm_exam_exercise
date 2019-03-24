@@ -1,5 +1,6 @@
 package de.goatfryed.pm.wheelmill;
 
+import de.goatfryed.pm.wheelmill.model.*;
 import org.fulib.FulibTools;
 import org.junit.Test;
 

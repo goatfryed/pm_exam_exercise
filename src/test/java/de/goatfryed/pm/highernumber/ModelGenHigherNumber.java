@@ -9,7 +9,7 @@ public class ModelGenHigherNumber {
 
     @Test
     public void generateModel() {
-        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.uniks.highernumber");
+        ClassModelBuilder mb = new ClassModelBuilder("de.goatfryed.pm.highernumber.model");
         ClassBuilder game = mb.buildClass("Game");
 
         ClassBuilder player = mb.buildClass("Player");
